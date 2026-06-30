@@ -1,84 +1,175 @@
-import { ArrowUpRight } from 'lucide-react';
-import { works } from '../data/portfolio.js';
-
-const difficulty = ['★★★★☆', '★★★★☆', '★★★☆☆', '★★★☆☆', '★★★☆☆', '★★★☆☆'];
-
-const galleryItems = [
-  ['Photo Diary', '日常、旅行与光影记录，后续可替换为你的摄影作品。'],
-  ['Collage Desk', '拼贴、手写字、便签、票根和视觉实验的收纳处。'],
-  ['Motion Mood', 'Kpop 舞蹈、舞台色彩和动态节奏带来的灵感板。'],
-  ['Language Notes', '日语、韩语学习碎片和成长记录的小角落。'],
-];
+import { useEffect, useMemo, useState } from 'react';
+import { ArrowRight, X } from 'lucide-react';
+import { filters, galleryItems, works } from '../data/portfolio.js';
 
 export function Works() {
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [selectedWork, setSelectedWork] = useState(null);
+  const [lightboxItem, setLightboxItem] = useState(null);
+
+  const visibleWorks = useMemo(() => {
+    if (activeFilter === 'All') {
+      return works;
+    }
+
+    return works.filter((work) => work.category === activeFilter);
+  }, [activeFilter]);
+
+  useEffect(() => {
+    if (!selectedWork && !lightboxItem) {
+      return undefined;
+    }
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setSelectedWork(null);
+        setLightboxItem(null);
+      }
+    };
+
+    document.body.classList.add('modal-open');
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.body.classList.remove('modal-open');
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [selectedWork, lightboxItem]);
+
   return (
-    <section className="page-section works-section" id="works">
-      <div className="section-inner section-heading">
-        <p className="kicker">Missions / Selected Projects</p>
-        <h2>每个作品都是一张任务卡，记录一次 AI 与产品能力的闯关。</h2>
-        <p>
-          这里保留了原来的 6 个项目数据，但把呈现方式改成 Mission Card：有状态、难度、角色和可继续替换的项目封面区。
-        </p>
-      </div>
-
-      <div className="section-inner mission-grid">
-        {works.map((work, index) => (
-          <article className={`mission-card pixel-panel accent-${work.accent}`} key={work.title}>
-            <div className="mission-cover">
-              <span className="mission-index">Mission {String(index + 1).padStart(2, '0')}</span>
-              <div className="mini-map" aria-hidden="true">
-                <span />
-                <span />
-                <span />
-                <span />
-              </div>
-            </div>
-
-            <div className="mission-body">
-              <div className="mission-meta">
-                <span>Status: Completed</span>
-                <span>Difficulty: {difficulty[index]}</span>
-              </div>
-              <h3>{work.title}</h3>
-              <p className="mission-type">{work.type}</p>
-              <p>{work.description}</p>
-
-              <div className="tag-row">
-                {work.tags.map((tag) => (
-                  <small key={tag}>{tag}</small>
-                ))}
-              </div>
-
-              <a className="mission-link" href="#contact">
-                Explore
-                <ArrowUpRight size={16} />
-              </a>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <div className="section-inner gallery-section" id="gallery">
-        <div className="section-heading compact-heading">
-          <p className="kicker">Gallery / Life Archive</p>
-          <h2>把生活方式也放进作品集，让个人品牌有记忆点。</h2>
+    <section className="works-section reveal-section" id="works">
+      <div className="section-inner projects-board">
+        <div className="board-title">
+          <h2>
+            <span>✩</span>
+            Selected Projects
+          </h2>
+          <a href="#contact">
+            View All
+            <ArrowRight size={17} />
+          </a>
         </div>
 
-        <div className="gallery-grid">
-          {galleryItems.map(([title, text], index) => (
-            <article className="gallery-card pixel-panel" key={title}>
-              <div className="gallery-visual" aria-hidden="true">
-                <span />
-                <span />
-                <span />
-              </div>
-              <small>Archive {String(index + 1).padStart(2, '0')}</small>
-              <h3>{title}</h3>
-              <p>{text}</p>
+        <div className="filter-menu" aria-label="Filter projects">
+          {filters.map((filter) => (
+            <button
+              className={activeFilter === filter ? 'active' : ''}
+              key={filter}
+              type="button"
+              onClick={() => setActiveFilter(filter)}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+
+        <div className="project-row">
+          {visibleWorks.map((work, index) => (
+            <article className="project-card" key={work.title}>
+              <button type="button" className="project-card-button" onClick={() => setSelectedWork(work)}>
+                <div className="project-cover">
+                  <img src={work.cover} alt="" />
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                </div>
+                <div className="project-body">
+                  <h3>{work.title}</h3>
+                  <p>{work.description}</p>
+                  <div className="tag-row">
+                    {work.tags.map((tag) => (
+                      <small key={tag}>{tag}</small>
+                    ))}
+                  </div>
+                </div>
+              </button>
             </article>
           ))}
         </div>
       </div>
+
+      <div className="section-inner gallery-board" id="gallery">
+        <div className="board-title">
+          <h2>
+            <span>✦</span>
+            Life Gallery
+          </h2>
+          <p>Click to open archive</p>
+        </div>
+
+        <div className="gallery-grid">
+          {galleryItems.map((item) => (
+            <button className="gallery-card" type="button" key={item.title} onClick={() => setLightboxItem(item)}>
+              <img src={item.image} alt="" />
+              <strong>{item.title}</strong>
+              <span>{item.caption}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {selectedWork ? <MissionModal work={selectedWork} onClose={() => setSelectedWork(null)} /> : null}
+      {lightboxItem ? <Lightbox item={lightboxItem} onClose={() => setLightboxItem(null)} /> : null}
     </section>
+  );
+}
+
+function MissionModal({ work, onClose }) {
+  return (
+    <div className="modal-layer" role="presentation" onMouseDown={onClose}>
+      <article
+        className="mission-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${work.title} details`}
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        <button className="modal-close" type="button" onClick={onClose} aria-label="Close project details">
+          <X size={18} />
+        </button>
+        <img src={work.cover} alt="" />
+        <div className="mission-detail">
+          <p className="kicker">Mission Detail</p>
+          <h2>{work.title}</h2>
+          <div className="mission-meta-grid">
+            <span>Status: {work.status}</span>
+            <span>Difficulty: {work.difficulty}</span>
+            <span>Role: {work.role}</span>
+          </div>
+          <p>{work.details}</p>
+          <div className="detail-block">
+            <strong>Tools</strong>
+            <div className="tag-row">
+              {work.tools.map((tool) => (
+                <small key={tool}>{tool}</small>
+              ))}
+            </div>
+          </div>
+          <div className="detail-block">
+            <strong>Outcome</strong>
+            <p>{work.outcome}</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+function Lightbox({ item, onClose }) {
+  return (
+    <div className="modal-layer" role="presentation" onMouseDown={onClose}>
+      <article
+        className="lightbox-card"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${item.title} gallery image`}
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        <button className="modal-close" type="button" onClick={onClose} aria-label="Close gallery image">
+          <X size={18} />
+        </button>
+        <img src={item.image} alt="" />
+        <h2>{item.title}</h2>
+        <p>{item.caption}</p>
+      </article>
+    </div>
   );
 }

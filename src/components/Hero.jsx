@@ -1,75 +1,38 @@
-import { ArrowRight, Mail, Sparkles } from 'lucide-react';
+import { Mail, Star } from 'lucide-react';
 import { hero, profile } from '../data/portfolio.js';
-
-const abilityStats = [
-  { label: 'AI Skill', value: 88 },
-  { label: 'Coding', value: 78 },
-  { label: 'Product', value: 82 },
-  { label: 'Design', value: 80 },
-  { label: 'Learning', value: 96 },
-];
 
 export function Hero() {
   return (
-    <section className="hero-section section-full" id="home">
-      <div className="sky-layer" aria-hidden="true">
-        <span className="cloud cloud-one" />
-        <span className="cloud cloud-two" />
-        <span className="cloud cloud-three" />
-      </div>
+    <section className="hero-section reveal-section" id="home">
+      <div className="hero-stage">
+        <img className="hero-art" src={hero.image} alt="Pastel pixel AI creator studio" />
+        <div className="hero-overlay" />
+        <div className="float-cloud cloud-a" aria-hidden="true" />
+        <div className="float-cloud cloud-b" aria-hidden="true" />
+        <span className="floating-star star-one" aria-hidden="true">✦</span>
+        <span className="floating-star star-two" aria-hidden="true">✧</span>
 
-      <div className="section-inner hero-dashboard">
-        <div className="hero-copy pixel-panel">
-          <p className="kicker">
-            <Sparkles size={16} />
-            {hero.eyebrow}
-          </p>
+        <div className="hero-copy">
           <h1>{hero.title}</h1>
-          <p className="hero-subtitle">{hero.subtitle}</p>
-          <p className="hero-intro">{hero.intro}</p>
-
-          <div className="role-row" aria-label="Portfolio roles">
-            <span>AI Developer</span>
-            <span>AI Product Manager</span>
-            <span>AI Designer</span>
-          </div>
-
+          <p className="role-line">AI Developer · AI Product Manager · AI Designer</p>
+          <div className="dash-line" />
+          <p className="hero-cn">{hero.subtitle}</p>
+          <p className="hero-cn">{hero.intro}</p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#works">
-              Start Missions
-              <ArrowRight size={17} />
+            <a className="btn btn-primary" href="#works">
+              View My Works
+              <Star size={17} />
             </a>
-            <a className="button button-secondary" href={`mailto:${profile.email}`}>
-              <Mail size={17} />
+            <a className="btn btn-secondary" href={`mailto:${profile.email}`}>
               Let&apos;s Connect
+              <Mail size={17} />
             </a>
           </div>
         </div>
 
-        <div className="studio-window pixel-border" aria-label="Yuwen creator studio illustration">
-          <img src={hero.image} alt="Pixel style AI creator studio with desk, laptop, robot, cat and camera" />
-          <div className="status-badge">
-            <span className="online-dot" />
-            Creator Online
-          </div>
-          <div className="quest-note">Today&apos;s Quest: make things warmer with AI</div>
-        </div>
-
-        <div className="ability-board pixel-panel" aria-label="Ability stats">
-          <div className="board-header">
-            <span>Character Stats</span>
-            <small>LV. 21</small>
-          </div>
-          {abilityStats.map((stat) => (
-            <div className="ability-row" key={stat.label}>
-              <span>{stat.label}</span>
-              <div className="ability-track" aria-hidden="true">
-                <span style={{ width: `${stat.value}%` }} />
-              </div>
-              <strong>{stat.value}</strong>
-            </div>
-          ))}
-        </div>
+        <span className="note-paper">Make things better with AI</span>
+        <span className="neon-sign">KEEP GOING!</span>
+        <span className="pixel-heart" />
       </div>
     </section>
   );

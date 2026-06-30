@@ -4,14 +4,14 @@ const branches = ['AI', 'Product', 'Frontend', 'Prompt', 'UX', 'Figma', 'React',
 
 export function Strengths() {
   return (
-    <section className="page-section strengths-section" id="strengths">
+    <section className="page-section strengths-section reveal-section" id="strengths">
       <div className="section-inner section-heading">
         <p className="kicker">Skill Tree</p>
         <h2>不是堆图标，而是一棵 AI 创作者的复合技能树。</h2>
         <p>技能点围绕 AI 实践、产品判断、视觉表达和工程落地展开，适合 AI 开发 / AI 产品经理 / AI 设计方向展示。</p>
       </div>
 
-      <div className="section-inner skill-tree pixel-panel">
+      <div className="section-inner skill-tree">
         <div className="tree-core">
           <span>Core</span>
           <strong>AI Creator</strong>
@@ -19,7 +19,7 @@ export function Strengths() {
 
         <div className="branch-row" aria-label="Skill branches">
           {branches.map((branch, index) => (
-            <span style={{ '--delay': `${index * 80}ms` }} key={branch}>
+            <span style={{ '--delay': `${index * 90}ms` }} key={branch}>
               {branch}
             </span>
           ))}
@@ -27,7 +27,7 @@ export function Strengths() {
 
         <div className="strengths-grid">
           {strengths.map((item, index) => (
-            <article className="strength-card" key={item.title} style={{ '--node': index + 1 }}>
+            <article className="strength-card" key={item.title}>
               <small>Skill Point {String(index + 1).padStart(2, '0')}</small>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
