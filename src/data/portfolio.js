@@ -11,6 +11,7 @@ import {
   Mail,
   MessageCircle,
   MonitorCog,
+  NotebookTabs,
   PenLine,
   Sparkles,
   WandSparkles,
@@ -56,7 +57,7 @@ export const hero = {
 
 export const about = {
   text:
-    '你好呀！我是雨雯，一名热爱 AI 与设计的创造者。我关注 AI 产品、用户体验、数据可视化和视觉表达，喜欢把想法落地成真实可用的作品。平时喜欢摄影、插画、拼贴、手写字、Kpop 舞蹈，也会用影像和文字记录生活。',
+    '你好呀！我是雨雯，一名热爱 AI 与设计的创作者。我关注 AI 产品、用户体验、数据可视化和视觉表达，喜欢把理性的结构设计与感性的影像语言结合起来，让想法落地成真实可用、也有温度的作品。平时喜欢摄影、插画、拼贴、手写字、Kpop 舞蹈，也会用影像和文字记录生活。',
   resumeHighlights: [
     '计算机科学与技术本科，关注 AI 开发、产品设计与创意技术。',
     '熟悉 Prompt、HTTP/JSON、API 调用、Python、C/C++、C# 与前端基础。',
@@ -72,10 +73,26 @@ export const about = {
 };
 
 export const stats = [
-  { value: '20+', label: 'AI Projects', note: '数字人、AI 海报、AI 产品验证与 Prompt 实验。' },
-  { value: '10+', label: 'Product Cases', note: '需求拆解、用户路径、反馈页与产品测试场景。' },
-  { value: '50+', label: 'Design Works', note: '海报、视觉实验、拼贴、影像与界面探索。' },
-  { value: '1000+', label: 'Creative Assets', note: '照片、素材、笔记、灵感板和创作记录。' },
+  {
+    value: '20+',
+    label: 'AI Projects',
+    note: '数字人、AI 海报、AI 产品验证与 Prompt 实验。',
+  },
+  {
+    value: '10+',
+    label: 'Product Cases',
+    note: '需求拆解、用户路径、反馈页与产品测试场景。',
+  },
+  {
+    value: '50+',
+    label: 'Design Works',
+    note: '海报、视觉实验、拼贴、影像与界面探索。',
+  },
+  {
+    value: '1000+',
+    label: 'Creative Assets',
+    note: '照片、素材、笔记、灵感板和创作记录。',
+  },
 ];
 
 export const filters = ['All', 'AI', 'Product', 'Visual', 'Life'];
@@ -85,7 +102,7 @@ export const works = [
     title: 'AI Digital Human Experiment',
     type: 'AI Design / Digital Human',
     category: 'AI',
-    description: '多模态工具生成数字人，完成照片关键词提取、AI 形象生成与视频制作。',
+    description: '使用多模态工具完成照片关键词提取、AI 形象生成、音色创建与数字人视频制作。',
     tags: ['AI Design', 'Digital Human'],
     accent: 'lavender',
     cover: '/assets/projects/ai-digital-human.png',
@@ -95,14 +112,14 @@ export const works = [
     tools: ['Prompt', 'AIGC', 'Voice', 'Video'],
     outcome: '完成从照片理解、角色生成、音色设计到数字人视频的完整链路。',
     details:
-      '这个项目用于验证多模态工具如何快速产出可展示的数字人内容。我负责关键词提取、生成策略、素材组织和视频流程串联。',
+      '这个项目用于验证多模态工具如何快速产出可展示的数字人内容。我负责关键词提取、生成策略、素材组织和视频流程串联，让 AI 生成结果更接近真实展示场景。',
     icon: WandSparkles,
   },
   {
     title: 'Lookee Parent Report Design',
     type: 'Product Design / Data Visualization',
     category: 'Product',
-    description: '为儿童英语口语练习产品设计家长学习反馈页，将数据转化为温暖的成长反馈。',
+    description: '为儿童英语口语练习产品设计家长学习反馈页，将数据转化为易理解、有温度的成长反馈。',
     tags: ['Product Design', 'Data Viz'],
     accent: 'blue',
     cover: '/assets/projects/lookee-parent-report.png',
@@ -110,16 +127,16 @@ export const works = [
     difficulty: '★★★★☆',
     role: 'AI PM / Product Design',
     tools: ['Feishu', 'User Scenario', 'Feedback Page', 'Testing'],
-    outcome: '把“盯进度、看坚持、查漏点、找对策”转化为家长可理解的反馈结构。',
+    outcome: '把“看进度、看坚持、查漏点、找对策”转化为家长可理解的反馈结构。',
     details:
-      '基于 Lookee AI 口练机的家长使用场景，梳理学习记录、能力情况、备考反馈等页面目标，并参与硬件测试与问题池维护。',
+      '基于 Lookee AI 口练机的家长使用场景，梳理学习记录、能力情况、备考反馈等页面目标，并参与硬件测试、问题池维护与反馈链路优化。',
     icon: MonitorCog,
   },
   {
     title: 'Visual Poster System',
     type: 'Brand Design / Poster',
     category: 'AI',
-    description: '基于用户数据生成分享海报，探索 AI 与品牌传播素材的自动化结合。',
+    description: '围绕用户数据生成分享海报系统，探索 AI 与品牌传播素材的自动化结合。',
     tags: ['Brand Design', 'AI Automation'],
     accent: 'pink',
     cover: '/assets/projects/visual-poster-system.png',
@@ -129,14 +146,14 @@ export const works = [
     tools: ['Template', 'Automation', 'Visual System'],
     outcome: '形成可复用的海报生成思路，适配分享传播和品牌视觉统一。',
     details:
-      '用模块化方式组织标题、数据、二维码、视觉装饰和用户信息，让传播素材更容易批量生产与维护。',
+      '用模块化方式组织标题、数据、二维码、视觉装饰和用户信息，让传播素材更容易批量生产与维护，也更适合结合 AI 工作流继续扩展。',
     icon: Layers3,
   },
   {
     title: 'Personal Photography Archive',
     type: 'Photography / Visual Diary',
     category: 'Life',
-    description: '记录生活、旅行、情绪与光影，把照片作为个人表达的一部分。',
+    description: '记录日常、旅行、情绪与光影，把照片作为个人表达的一部分。',
     tags: ['Photography', 'Visual Diary'],
     accent: 'mint',
     cover: '/assets/projects/photography-archive.png',
@@ -146,7 +163,7 @@ export const works = [
     tools: ['Camera', 'Light', 'Diary', 'Archive'],
     outcome: '沉淀个人影像语言，让作品集不只展示技能，也展示审美记忆点。',
     details:
-      '把日常观察、旅行片段和情绪记录整理成视觉档案，为产品设计和影像叙事提供灵感来源。',
+      '把日常观察、旅行片段和情绪记录整理成视觉档案，为产品设计、内容表达和影像叙事提供灵感来源。',
     icon: Camera,
   },
   {
@@ -163,7 +180,7 @@ export const works = [
     tools: ['Collage', 'Handwriting', 'Notebook'],
     outcome: '建立更个人化的手账式视觉语言，适合品牌情绪和内容表达。',
     details:
-      '通过纸张、照片、便签、手写字和色块组合，探索更有温度的视觉表达方式。',
+      '通过纸张、照片、便签、手写字和色块组合，探索更有温度的视觉表达方式，也让作品集拥有生活痕迹。',
     icon: PenLine,
   },
   {
@@ -239,4 +256,10 @@ export const strengths = [
     description: '理解 API、日志复现、测试验收、Git 协作与基础工程流程。',
     icon: Code2,
   },
+];
+
+export const interactiveTips = [
+  'Interactive Mode 已开启：点击卡片会掉落像素星星。',
+  'Mission Card 可以展开成项目详情。',
+  'Gallery 支持左右切换和 Esc 关闭。',
 ];

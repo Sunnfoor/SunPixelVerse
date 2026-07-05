@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Home, Mail, Package, PawPrint, Sparkles, Star, UsersRound } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Gamepad2, Home, Mail, Package, PawPrint, Sparkles, Star, UsersRound } from 'lucide-react';
 import { navItems, profile } from '../data/portfolio.js';
+import { springy, usePrefersReducedMotion } from '../utils/animation.js';
 
 const navIconMap = {
   '#home': Home,
@@ -10,8 +12,9 @@ const navIconMap = {
   '#contact': Mail,
 };
 
-export function Navbar() {
+export function Navbar({ interactiveMode, onToggleInteractiveMode }) {
   const [activeHref, setActiveHref] = useState('#home');
+  const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const sections = navItems
@@ -38,32 +41,67 @@ export function Navbar() {
   return (
     <header className="site-header">
       <nav className="nav-shell" aria-label="Primary navigation">
-        <a className="brand-mark" href="#home" aria-label="Back to home">
+        <motion.a
+          className="brand-mark"
+          href="#home"
+          aria-label="Back to home"
+          whileHover={reducedMotion ? undefined : { y: -2, rotate: -1 }}
+          whileTap={reducedMotion ? undefined : { scale: 0.96 }}
+          transition={springy}
+        >
           <img src={profile.catLogo} alt="" />
           <strong>{profile.portfolio}</strong>
           <Sparkles size={15} />
-        </a>
+        </motion.a>
 
         <div className="nav-links">
           {navItems.map((item) => {
             const Icon = navIconMap[item.href] ?? Star;
+            const isActive = activeHref === item.href;
+
             return (
-              <a
+              <motion.a
                 key={item.href}
                 href={item.href}
-                className={activeHref === item.href ? 'active' : ''}
+                className={isActive ? 'active' : ''}
+                whileHover={reducedMotion ? undefined : { y: -3, scale: 1.05 }}
+                whileTap={reducedMotion ? undefined : { scale: 0.94 }}
+                transition={springy}
               >
                 <Icon size={17} />
                 {item.label}
-              </a>
+                {isActive ? (
+                  <motion.span className="nav-active-underline" layoutId="nav-active-underline" />
+                ) : null}
+              </motion.a>
             );
           })}
         </div>
 
-        <a className="nav-contact" href={`mailto:${profile.email}`}>
-          Contact Me
-          <PawPrint size={18} />
-        </a>
+        <div className="nav-actions">
+          <motion.button
+            className={interactiveMode ? 'nav-mode-toggle active' : 'nav-mode-toggle'}
+            type="button"
+            onClick={onToggleInteractiveMode}
+            whileHover={reducedMotion ? undefined : { y: -2, scale: 1.04 }}
+            whileTap={reducedMotion ? undefined : { scale: 0.92 }}
+            transition={springy}
+            aria-pressed={interactiveMode}
+          >
+            <Gamepad2 size={17} />
+            {interactiveMode ? 'Mode On' : 'Mode Off'}
+          </motion.button>
+          <motion.a
+            className="nav-contact"
+            href={`mailto:${profile.email}`}
+            whileHover={reducedMotion ? undefined : { y: -3, scale: 1.03 }}
+            whileTap={reducedMotion ? undefined : { scale: 0.94 }}
+            transition={springy}
+          >
+            Contact Me
+            <PawPrint size={18} />
+          </motion.a>
+        </div>
       </nav>
     </header>
   );

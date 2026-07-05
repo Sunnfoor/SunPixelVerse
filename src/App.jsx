@@ -1,21 +1,36 @@
+import { useEffect, useState } from 'react';
 import { Navbar } from './components/Navbar.jsx';
 import { Hero } from './components/Hero.jsx';
 import { About } from './components/About.jsx';
 import { Works } from './components/Works.jsx';
 import { Strengths } from './components/Strengths.jsx';
 import { Contact } from './components/Contact.jsx';
+import { MouseTrail } from './components/MouseTrail.jsx';
+import { CatLoader } from './components/CatLoader.jsx';
 
 export default function App() {
+  const [interactiveMode, setInteractiveMode] = useState(true);
+
+  useEffect(() => {
+    document.body.classList.toggle('site-interactive', interactiveMode);
+    return () => document.body.classList.remove('site-interactive');
+  }, [interactiveMode]);
+
   return (
     <>
-      <Navbar />
+      <CatLoader />
+      <Navbar
+        interactiveMode={interactiveMode}
+        onToggleInteractiveMode={() => setInteractiveMode((current) => !current)}
+      />
       <main>
-        <Hero />
+        <Hero interactiveMode={interactiveMode} />
         <About />
-        <Works />
+        <Works interactiveMode={interactiveMode} />
         <Strengths />
-        <Contact />
+        <Contact interactiveMode={interactiveMode} />
       </main>
+      <MouseTrail enabled={interactiveMode} />
     </>
   );
 }

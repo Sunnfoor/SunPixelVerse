@@ -1,5 +1,7 @@
+import { motion } from 'framer-motion';
 import { BookOpenText, Mail, MessageCircle, NotebookTabs } from 'lucide-react';
 import { about, profile, stats } from '../data/portfolio.js';
+import { popItem, sectionReveal, springy, staggerParent, usePrefersReducedMotion } from '../utils/animation.js';
 
 const findMe = [
   { icon: Mail, label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
@@ -8,26 +10,44 @@ const findMe = [
   { icon: NotebookTabs, label: 'Portfolio', value: profile.portfolio },
 ];
 
+const achievementIcons = ['pixel-robot', 'pixel-envelope', 'pixel-palette', 'pixel-star'];
+
 export function About() {
+  const reducedMotion = usePrefersReducedMotion();
+  const viewport = { once: true, amount: 0.25 };
+
   return (
     <section className="about-section reveal-section" id="about">
       <div className="cloud-divider" aria-hidden="true" />
-      <div className="section-inner about-card paper-grid">
-        <div className="polaroid">
+      <motion.div
+        className="section-inner about-card paper-grid"
+        variants={reducedMotion ? undefined : sectionReveal}
+        initial={reducedMotion ? undefined : 'hidden'}
+        whileInView={reducedMotion ? undefined : 'show'}
+        viewport={viewport}
+      >
+        <motion.div
+          className="polaroid"
+          initial={reducedMotion ? undefined : { opacity: 0, rotate: -10, y: 32 }}
+          whileInView={reducedMotion ? undefined : { opacity: 1, rotate: -4, y: 0 }}
+          whileHover={reducedMotion ? undefined : { rotate: -1, y: -8, scale: 1.035 }}
+          transition={springy}
+          viewport={viewport}
+        >
           <span className="tape tape-top" />
           <img src={profile.avatar} alt="Yuwen pixel portrait" />
-        </div>
+        </motion.div>
 
-        <div className="about-copy">
-          <h2>
-            <span className="about-icon" aria-hidden="true">♣</span>
+        <motion.div className="about-copy" variants={reducedMotion ? undefined : staggerParent}>
+          <motion.h2 variants={reducedMotion ? undefined : popItem}>
+            <span className="about-icon" aria-hidden="true">♡</span>
             About Me
-          </h2>
-          <p>{about.text}</p>
-        </div>
+          </motion.h2>
+          <motion.p variants={reducedMotion ? undefined : popItem}>{about.text}</motion.p>
+        </motion.div>
 
-        <div className="find-me">
-          <h2>Find Me</h2>
+        <motion.div className="find-me" variants={reducedMotion ? undefined : staggerParent}>
+          <motion.h2 variants={reducedMotion ? undefined : popItem}>Find Me</motion.h2>
           {findMe.map((item) => {
             const Icon = item.icon;
             const content = (
@@ -41,31 +61,59 @@ export function About() {
             );
 
             return item.href ? (
-              <a key={item.label} href={item.href} target="_blank" rel="noreferrer">
+              <motion.a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                variants={reducedMotion ? undefined : popItem}
+                whileHover={reducedMotion ? undefined : { x: 7, scale: 1.02 }}
+                whileTap={reducedMotion ? undefined : { scale: 0.96 }}
+              >
                 {content}
-              </a>
+              </motion.a>
             ) : (
-              <p key={item.label}>{content}</p>
+              <motion.p
+                key={item.label}
+                variants={reducedMotion ? undefined : popItem}
+                whileHover={reducedMotion ? undefined : { x: 7, scale: 1.02 }}
+              >
+                {content}
+              </motion.p>
             );
           })}
-        </div>
+        </motion.div>
 
-        <div className="achievements">
-          <h2>Achievements</h2>
+        <motion.div className="achievements" variants={reducedMotion ? undefined : staggerParent}>
+          <motion.h2 variants={reducedMotion ? undefined : popItem}>Achievements</motion.h2>
           <div className="achievement-grid">
             {stats.map((item, index) => (
-              <div className="achievement-card" key={item.label} data-note={item.note} tabIndex="0">
+              <motion.div
+                className="achievement-card"
+                key={item.label}
+                data-note={item.note}
+                tabIndex="0"
+                variants={reducedMotion ? undefined : popItem}
+                whileHover={reducedMotion ? undefined : { y: -7, scale: 1.025 }}
+                whileFocus={reducedMotion ? undefined : { y: -7, scale: 1.025 }}
+                transition={springy}
+              >
                 <strong>{item.value}</strong>
-                <span>{item.label}</span>
-                <i>{['🤖', '💌', '🎨', '⭐'][index]}</i>
-              </div>
+                <span className="achievement-label">{item.label}</span>
+                <motion.span
+                  className={`pixel-sticker ${achievementIcons[index]}`}
+                  aria-hidden="true"
+                  animate={reducedMotion ? undefined : { y: [0, -4, 0], rotate: [0, -2, 2, 0] }}
+                  transition={{ duration: 2.8, repeat: Infinity, delay: index * 0.24, ease: 'easeInOut' }}
+                />
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        <span className="paper-plane">✈</span>
-        <span className="corner-cat">🐱</span>
-      </div>
+        <span className="paper-plane" aria-hidden="true" />
+        <span className="corner-cat" aria-hidden="true" />
+      </motion.div>
     </section>
   );
 }
