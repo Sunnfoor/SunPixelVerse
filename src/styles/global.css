@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   color-scheme: light;
   --bg: #efe8ff;
@@ -94,8 +96,18 @@ body.is-loading {
   overflow: hidden;
 }
 
+body.immersive-active {
+  overflow: hidden;
+}
+
 .site-interactive {
   cursor: default;
+}
+
+.portfolio-top-anchor {
+  display: block;
+  height: 70px;
+  margin-top: -70px;
 }
 
 .section-inner {
