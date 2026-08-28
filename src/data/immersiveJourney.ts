@@ -10,9 +10,12 @@ export type SceneTiming = {
   loop?: boolean;
 };
 
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+
 export const immersiveVideo = {
-  src: '/assets/videos/immersive-journey.mp4',
-  poster: '/assets/hero/hero-pixel-studio.png',
+  src: asset('assets/videos/immersive-journey.mp4'),
+  poster: asset('assets/hero/hero-pixel-studio.png'),
+  catLogo: asset('assets/avatar/cat-logo.png'),
 };
 
 export const sceneTimings: Record<SceneKey, SceneTiming> = {

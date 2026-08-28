@@ -16,6 +16,8 @@ import {
   WandSparkles,
 } from 'lucide-react';
 
+const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
+
 export const profile = {
   name: 'Yuwen',
   chineseName: '严玉雯',
@@ -25,8 +27,8 @@ export const profile = {
   wechat: 'yuwen_design',
   xiaohongshu: '@sunfor',
   portfolio: "Yuwen's Portfolio",
-  avatar: '/assets/avatar/avatar-polaroid.png',
-  catLogo: '/assets/avatar/cat-logo.png',
+  avatar: asset('assets/avatar/avatar-polaroid.png'),
+  catLogo: asset('assets/avatar/cat-logo.png'),
   csdn: {
     label: 'CSDN: Sunfor_sun',
     url: 'https://blog.csdn.net/Sunfor_sun',
@@ -51,7 +53,7 @@ export const hero = {
   title: "Hello, I'm Yuwen ♥",
   subtitle: '用 AI 与设计创造温暖的体验',
   intro: '记录成长，也创造新的可能',
-  image: '/assets/hero/hero-pixel-studio.png',
+  image: asset('assets/hero/hero-pixel-studio.png'),
 };
 
 export const about = {
@@ -104,7 +106,7 @@ export const works = [
     description: '使用多模态工具完成照片关键词提取、AI 形象生成、音色创建与数字人视频制作。',
     tags: ['AI Design', 'Digital Human'],
     accent: 'lavender',
-    cover: '/assets/projects/ai-digital-human.png',
+    cover: asset('assets/projects/ai-digital-human.png'),
     status: 'Completed',
     difficulty: '★★★★☆',
     role: 'AI Workflow / Visual Experiment',
@@ -121,7 +123,7 @@ export const works = [
     description: '为儿童英语口语练习产品设计家长学习反馈页，将数据转化为易理解、有温度的成长反馈。',
     tags: ['Product Design', 'Data Viz'],
     accent: 'sky',
-    cover: '/assets/projects/lookee-parent-report.png',
+    cover: asset('assets/projects/lookee-parent-report.png'),
     status: 'Completed',
     difficulty: '★★★★☆',
     role: 'AI PM / Product Design',
@@ -138,7 +140,7 @@ export const works = [
     description: '围绕用户数据生成分享海报系统，探索 AI 与品牌传播素材的自动化结合。',
     tags: ['Brand Design', 'AI Automation'],
     accent: 'pink',
-    cover: '/assets/projects/visual-poster-system.png',
+    cover: asset('assets/projects/visual-poster-system.png'),
     status: 'Completed',
     difficulty: '★★★☆☆',
     role: 'Visual System / Automation',
@@ -155,7 +157,7 @@ export const works = [
     description: '记录日常、旅行、情绪与光影，把照片作为个人表达的一部分。',
     tags: ['Photography', 'Visual Diary'],
     accent: 'mint',
-    cover: '/assets/projects/photography-archive.png',
+    cover: asset('assets/projects/photography-archive.png'),
     status: 'Ongoing',
     difficulty: '★★★☆☆',
     role: 'Photography / Storytelling',
@@ -172,7 +174,7 @@ export const works = [
     description: '结合拼贴、手写字与文字表达，形成具有个人气质的视觉语言。',
     tags: ['Collage', 'Handwriting'],
     accent: 'cream',
-    cover: '/assets/projects/collage-notes.png',
+    cover: asset('assets/projects/collage-notes.png'),
     status: 'Ongoing',
     difficulty: '★★★☆☆',
     role: 'Visual Exploration',
@@ -189,7 +191,7 @@ export const works = [
     description: '从舞蹈、音乐和舞台视觉中提取节奏感、色彩和动态灵感。',
     tags: ['Motion', 'Inspiration'],
     accent: 'silver',
-    cover: '/assets/projects/kpop-motion.png',
+    cover: asset('assets/projects/kpop-motion.png'),
     status: 'Ongoing',
     difficulty: '★★★☆☆',
     role: 'Motion Inspiration',
@@ -204,22 +206,22 @@ export const works = [
 export const galleryItems = [
   {
     title: 'Photo Diary',
-    image: '/assets/projects/photography-archive.png',
+    image: asset('assets/projects/photography-archive.png'),
     caption: '日常、旅行与光影记录，后续可以替换为你的真实摄影作品。',
   },
   {
     title: 'Collage Desk',
-    image: '/assets/projects/collage-notes.png',
+    image: asset('assets/projects/collage-notes.png'),
     caption: '拼贴、手写字、便签、票根和视觉实验的收纳处。',
   },
   {
     title: 'Motion Mood',
-    image: '/assets/projects/kpop-motion.png',
+    image: asset('assets/projects/kpop-motion.png'),
     caption: 'Kpop 舞蹈、舞台色彩和动态节奏带来的灵感板。',
   },
   {
     title: 'AI Studio',
-    image: '/assets/hero/hero-pixel-studio.png',
+    image: asset('assets/hero/hero-pixel-studio.png'),
     caption: 'AI 创作者的像素工作室，也是整个网站的视觉母题。',
   },
 ];

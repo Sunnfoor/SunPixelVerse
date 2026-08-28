@@ -420,7 +420,7 @@ export function ImmersiveJourney({ works, interactiveMode, onEnterPortfolio }: I
       <div className="pointer-events-none absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(255,255,255,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.10)_1px,transparent_1px)] [background-size:24px_24px]" />
 
       <div className="absolute left-5 top-5 z-10 flex items-center gap-3 rounded-full border border-white/45 bg-white/20 px-4 py-2 text-sm font-black text-white shadow-[0_12px_34px_rgba(72,55,160,.24)] backdrop-blur-md md:left-8 md:top-8">
-        <img src="/assets/avatar/cat-logo.png" alt="" className="h-9 w-9 rounded-xl border border-white/60 object-cover" />
+        <img src={immersiveVideo.catLogo} alt="" className="h-9 w-9 rounded-xl border border-white/60 object-cover" />
         <span className="font-mono tracking-wide">Yuwen's AI Journey</span>
       </div>
 
